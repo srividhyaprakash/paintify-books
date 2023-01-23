@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "paintify-books"
+version = "0.1.0"
+description = "AI-generated art of scenes from books"
+authors = ["pradeepcep <pradeepcep@gmail.com>"]
+license = "MIT License"
+readme = "README.md"
+packages = [{include = "paintify_books"}]
+
+[tool.poetry.dependencies]
+python = "^3.11.1"
+openai = "^0.26.1"
+
+
+[tool.poetry.group.dev.dependencies]
+ipdb = "^0.13.11"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
