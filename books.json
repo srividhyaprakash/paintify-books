@@ -15,4 +15,26 @@
   "dev": {
     "comments": "contains the first 25 chapters only"
   }
+}, {
+  "name": "The Life and Adventures of Robinson Crusoe",
+  "author": "Daniel Defoe",
+  "source_url": "https://www.gutenberg.org/files/521/521-0.txt",
+  "local_path": "books/robinson-crusoe",
+  "updated_at": "2023-01-22T23:23:45.365724",
+  "files": [
+    "0.txt",
+    "1.txt",
+    "2.txt",
+    "3.txt"
+  ]
+}, {
+  "name": "Alice's Adventures in Wonderland",
+  "author": "Lewis Carroll",
+  "source_url": "https://www.gutenberg.org/files/11/11-0.txt",
+  "local_path": "books/alice-in-wonderland",
+  "updated_at": "2023-01-22T23:23:45.365724",
+  "files": [
+    "0.txt",
+    "1.txt"
+  ]
 }]
