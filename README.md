@@ -1,6 +1,6 @@
 # Paintify Books
 
-AI-generated art of scenes from books
+AI-generated art of scenes from books/ text
 
 ## Pre-requisites
 
