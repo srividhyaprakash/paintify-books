@@ -43,7 +43,7 @@ class VideoConverter:
         # Release the VideoWriter
         video_writer.release()
 
-        print(f"Video saved at {output_path}.")
+        print("Video saved at {}.".format(output_path))
 
 if __name__ == "__main__":
     # Check if frames_dir is provided as command line argument
