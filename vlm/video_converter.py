@@ -1,6 +1,6 @@
 import os
+import subprocess
 import sys
-import cv2
 
 class VideoConverter:
     def __init__(self, frames_dir, output_dir=None, output_fps=30):
@@ -8,40 +8,28 @@ class VideoConverter:
         self.output_dir = output_dir
         self.output_fps = output_fps
 
-    def convert_to_video(self):
-        # Get the list of frames in the directory
-        frame_files = sorted(os.listdir(self.frames_dir))
-
-        if not frame_files:
-            print("No frames found in the directory.")
-            return
-
-        # Read the first frame to get the frame size
-        first_frame_path = os.path.join(self.frames_dir, frame_files[0])
-        first_frame = cv2.imread(first_frame_path)
-        height, width, channels = first_frame.shape
-
+    def convert_frames_to_video(self):
         # Determine the default output directory
         if not self.output_dir:
             self.output_dir = os.path.dirname(self.frames_dir)
 
         # Determine the output filename from the frames
-        first_frame_name = frame_files[0]
+        first_frame_name = os.listdir(self.frames_dir)[0]
         output_filename = first_frame_name.split("_")[0] + ".mp4"
         output_path = os.path.join(self.output_dir, output_filename)
 
-        # Define the video codec and create a VideoWriter object
-        fourcc = cv2.VideoWriter_fourcc(*'mp4v')  # Use appropriate codec for the desired output video format
-        video_writer = cv2.VideoWriter(output_path, fourcc, self.output_fps, (width, height))
+        # FFmpeg command
+        ffmpeg_cmd = [
+            'ffmpeg',
+            '-framerate', str(self.output_fps),
+            '-i', os.path.join(self.frames_dir,  first_frame_name.split("_")[0] + '_frame%d.jpg'),
+            '-c:v', 'libx264',
+            '-pix_fmt', 'yuv420p',
+            output_path
+        ]
 
-        # Iterate through each frame and write it to the video
-        for frame_file in frame_files:
-            frame_path = os.path.join(self.frames_dir, frame_file)
-            frame = cv2.imread(frame_path)
-            video_writer.write(frame)
-
-        # Release the VideoWriter
-        video_writer.release()
+        # Execute FFmpeg command
+        subprocess.run(ffmpeg_cmd)
 
         print("Video saved at {}.".format(output_path))
 
@@ -65,4 +53,4 @@ if __name__ == "__main__":
         output_fps = 30
 
     video_converter = VideoConverter(frames_dir, output_dir, output_fps)
-    video_converter.convert_to_video()
+    video_converter.convert_frames_to_video()
